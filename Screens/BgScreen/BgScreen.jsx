@@ -1,17 +1,32 @@
-import React from "react";
-import { ImageBackground, StyleSheet, View } from "react-native";
+import React, { useState } from "react";
+import {
+  ImageBackground,
+  StyleSheet,
+  View,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 
 import imageBG from "../../images/Photo BG.png";
 
-const BgScreen = ({ children }) => (
-  <View style={styles.mainContainer}>
-    <ImageBackground source={imageBG} style={styles.image}>
-      <View style={styles.overlayContainer}>
-        <View style={styles.overlayContent}>{children}</View>
-      </View>
-    </ImageBackground>
-  </View>
-);
+const BgScreen = ({ children }) => {
+  const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+
+  return (
+    <View style={styles.mainContainer}>
+      <ImageBackground source={imageBG} style={styles.image}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={styles.overlayContainer}
+        >
+          {/* <View style={styles.overlayContainer}> */}
+          <View style={styles.overlayContent}>{children}</View>
+          {/* </View> */}
+        </KeyboardAvoidingView>
+      </ImageBackground>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -30,7 +45,7 @@ const styles = StyleSheet.create({
   },
   overlayContent: {
     paddingTop: 32,
-    paddingBottom: 78,
+    paddingBottom: 32,
     paddingLeft: 16,
     paddingRight: 16,
   },

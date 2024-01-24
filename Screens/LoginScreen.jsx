@@ -19,7 +19,12 @@ const LoginScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={{
+        ...styles.container,
+        marginBottom: setIsShowKeyboard ? 20 : 100,
+      }}
+    >
       <Text style={styles.h1}>Увійти</Text>
 
       <TextInput
@@ -27,6 +32,9 @@ const LoginScreen = () => {
         onChangeText={onChangeEmail}
         value={email}
         placeholder="Адреса електронної пошти"
+        onFocus={() => {
+          setIsShowKeyboard(true);
+        }}
       />
       <View style={styles.passwordContainer}>
         <TextInput
@@ -62,7 +70,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontStyle: "normal",
     fontWeight: "500",
-    lineHeight: "normal",
     letterSpacing: 0.3,
     marginBottom: 33,
   },
