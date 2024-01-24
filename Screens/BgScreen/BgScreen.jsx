@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   ImageBackground,
   StyleSheet,
@@ -10,13 +10,13 @@ import {
 import imageBG from "../../images/Photo BG.png";
 
 const BgScreen = ({ children }) => {
-  const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+  //   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
 
   return (
     <View style={styles.mainContainer}>
       <ImageBackground source={imageBG} style={styles.image}>
         <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          behavior={Platform.OS === "ios" ? "padding" : null}
           style={styles.overlayContainer}
         >
           {/* <View style={styles.overlayContainer}> */}

@@ -3,13 +3,20 @@ import {
   StyleSheet,
   View,
   Text,
+  Image,
   TextInput,
   TouchableOpacity,
 } from "react-native";
 
+import SvgUri from "react-native-svg-uri";
+
+// import AddAvatar from "../images/addPhoto.svg";
+import AddAvatar from "../images/addPhoto2.svg";
+
 import BigButton from "./Buttons/BigBtn";
 
-const LoginScreen = () => {
+const RegistrationScreen = () => {
+  const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -20,8 +27,15 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.h1}>Увійти</Text>
+      <SvgUri width={25} height={25} source={AddAvatar} style={styles.avatar} />
+      <Text style={styles.h1}>Реєстрація</Text>
 
+      <TextInput
+        style={styles.input}
+        onChangeText={setLogin}
+        value={login}
+        placeholder="Логін"
+      />
       <TextInput
         style={styles.input}
         onChangeText={setEmail}
@@ -34,6 +48,7 @@ const LoginScreen = () => {
           secureTextEntry={!showPassword}
           onChangeText={setPassword}
           value={password}
+          placeholder="Пароль"
         />
         <TouchableOpacity
           onPress={toggleShowPassword}
@@ -43,9 +58,9 @@ const LoginScreen = () => {
         </TouchableOpacity>
       </View>
 
-      <BigButton btnName="Увійти" />
+      <BigButton btnName="Зареєстуватися" />
 
-      <Text style={styles.textLittle}>Немає акаунту? Зареєструватися</Text>
+      <Text style={styles.textLittle}>Вже є акаунт? Увійти</Text>
     </View>
   );
 };
@@ -56,6 +71,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  avatar: {
+    // position: "absolute",
+    // top: -90,
+    // left: "center",
+    width: 25,
+    height: 25,
+    borderRadius: 16,
+    // backgroundColor: "#F6F6F6",
+  },
   h1: {
     color: "#212121",
     textAlign: "center",
@@ -63,6 +87,7 @@ const styles = StyleSheet.create({
     fontStyle: "normal",
     fontWeight: "500",
     letterSpacing: 0.3,
+    marginTop: 62,
     marginBottom: 33,
   },
   textLittle: {
@@ -109,4 +134,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default RegistrationScreen;
