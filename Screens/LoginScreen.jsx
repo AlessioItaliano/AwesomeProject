@@ -18,6 +18,10 @@ const LoginScreen = () => {
     setShowPassword(!showPassword);
   };
 
+  const onLogIn = () => {
+    Alert.alert("Credentials", `${login} +  ${password}`);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.h1}>Увійти</Text>
@@ -43,7 +47,7 @@ const LoginScreen = () => {
         </TouchableOpacity>
       </View>
 
-      <BigButton btnName="Увійти" />
+      <BigButton btnName="Увійти" onPress={onLogIn} />
 
       <Text style={styles.textLittle}>Немає акаунту? Зареєструватися</Text>
     </View>

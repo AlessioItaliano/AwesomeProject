@@ -5,6 +5,8 @@ import {
   View,
   KeyboardAvoidingView,
   Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 
 import imageBG from "../../images/Photo BG.png";
@@ -13,18 +15,20 @@ const BgScreen = ({ children }) => {
   //   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
 
   return (
-    <View style={styles.mainContainer}>
-      <ImageBackground source={imageBG} style={styles.image}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : null}
-          style={styles.overlayContainer}
-        >
-          {/* <View style={styles.overlayContainer}> */}
-          <View style={styles.overlayContent}>{children}</View>
-          {/* </View> */}
-        </KeyboardAvoidingView>
-      </ImageBackground>
-    </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.mainContainer}>
+        <ImageBackground source={imageBG} style={styles.image}>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : null}
+            style={styles.overlayContainer}
+          >
+            {/* <View style={styles.overlayContainer}> */}
+            <View style={styles.overlayContent}>{children}</View>
+            {/* </View> */}
+          </KeyboardAvoidingView>
+        </ImageBackground>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 

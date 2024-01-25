@@ -3,15 +3,15 @@ import {
   StyleSheet,
   View,
   Text,
-  Image,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 
 import SvgUri from "react-native-svg-uri";
 
-// import AddAvatar from "../images/addPhoto.svg";
-import AddAvatar from "../images/addPhoto2.svg";
+import AddAvatar from "../images/addPhoto.svg";
+// import RemoveAvatar from "../images/removePhoto.svg";
 
 import BigButton from "./Buttons/BigBtn";
 
@@ -25,9 +25,20 @@ const RegistrationScreen = () => {
     setShowPassword(!showPassword);
   };
 
+  const onSingUp = () => {
+    Alert.alert("Credentials", `${login} + ${email} +  ${password}`);
+  };
+
   return (
     <View style={styles.container}>
-      <SvgUri width={25} height={25} source={AddAvatar} style={styles.avatar} />
+      <View style={styles.avatar}>
+        <SvgUri
+          width={25}
+          height={25}
+          source={AddAvatar}
+          style={styles.avatarIcon}
+        />
+      </View>
       <Text style={styles.h1}>Реєстрація</Text>
 
       <TextInput
@@ -58,7 +69,7 @@ const RegistrationScreen = () => {
         </TouchableOpacity>
       </View>
 
-      <BigButton btnName="Зареєстуватися" />
+      <BigButton btnName="Зареєстуватися" onPress={onSingUp} />
 
       <Text style={styles.textLittle}>Вже є акаунт? Увійти</Text>
     </View>
@@ -72,14 +83,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   avatar: {
-    // position: "absolute",
-    // top: -90,
-    // left: "center",
-    width: 25,
-    height: 25,
+    position: "absolute",
+    top: -90,
+    left: "center",
+    width: 120,
+    height: 120,
     borderRadius: 16,
-    // backgroundColor: "#F6F6F6",
+    backgroundColor: "#F6F6F6",
   },
+  avatarIcon: { position: "absolute", bottom: 20, right: -12 },
   h1: {
     color: "#212121",
     textAlign: "center",
