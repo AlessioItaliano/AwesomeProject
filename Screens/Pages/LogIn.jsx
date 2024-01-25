@@ -6,7 +6,6 @@ import {
   Alert,
   TextInput,
   TouchableOpacity,
-  Button,
 } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
@@ -62,8 +61,6 @@ const LogIn = () => {
         <Text style={styles.textEnter}>Немає акаунту?</Text>
         <EnterDownButton title="Зареєструватися" onPress={NavigateTo} />
       </View>
-
-      <Button title="Home" onPress={() => navigation.navigate("Home")} />
     </View>
   );
 };

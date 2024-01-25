@@ -81,6 +81,7 @@ const Registration = () => {
         <Text style={styles.textEnter}>Вже є акаунт?</Text>
         <EnterDownButton title="Увійти" onPress={NavigateTo} />
       </View>
+      <Button title="Home" onPress={() => navigation.navigate("Home")} />
     </View>
   );
 };
