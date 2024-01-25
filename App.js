@@ -1,18 +1,26 @@
+import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
-// import LoginScreen from "./Screens/LoginScreen.jsx";
+
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+
 import RegistrationScreen from "./Screens/RegistrationScreen.jsx";
-import BgScreen from "./Screens/BgScreen/BgScreen.jsx";
+import LoginScreen from "./Screens/LoginScreen.jsx";
+import HomeScreen from "./Screens/HomeScreen.jsx";
+// import MainBackground from "./Screens/MainBackground/MainBackground.jsx";
+
+const MainStack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <BgScreen>
-        {/* <LoginScreen /> */}
-        <RegistrationScreen />
-      </BgScreen>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <MainStack.Navigator>
+        <MainStack.Screen name="Registration" component={RegistrationScreen} />
+        <MainStack.Screen name="Login" component={LoginScreen} />
+        <MainStack.Screen name="Home" component={HomeScreen} />
+      </MainStack.Navigator>
+    </NavigationContainer>
   );
 }
 
@@ -24,3 +32,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+// <View style={styles.container}>
+//   {/* <MainBackground> */}
+//   {/* <LoginScreen /> */}
+//   {/* <RegistrationScreen /> */}
+//   {/* </MainBackground> */}
+//   <StatusBar style="auto" />
+// </View>;
