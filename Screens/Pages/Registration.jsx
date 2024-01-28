@@ -10,10 +10,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-// import SvgUri from "react-native-svg-uri";
-
-// import AddAvatar from "../images/addPhoto.svg";
-// import RemoveAvatar from "../images/removePhoto.svg";
+import AddUserAvatar from "../../images/Icons/addUserAvatar";
 
 import BigButton from "../Buttons/BigButton";
 import EnterDownButton from "../Buttons/EnterDownButton";
@@ -39,12 +36,7 @@ const Registration = () => {
   return (
     <View style={styles.container}>
       <View style={styles.avatar}>
-        {/* <SvgUri
-          width={25}
-          height={25}
-          source={AddAvatar}
-          style={styles.avatarIcon}
-        /> */}
+        <AddUserAvatar style={styles.avatarIcon} />
       </View>
       <Text style={styles.h1}>Реєстрація</Text>
 
@@ -101,7 +93,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     backgroundColor: "#F6F6F6",
   },
-  avatarIcon: { position: "absolute", bottom: 20, right: -12 },
+  avatarIcon: { position: "absolute", bottom: 18, right: -18 },
   h1: {
     color: "#212121",
     textAlign: "center",

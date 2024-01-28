@@ -9,7 +9,7 @@ import {
   Keyboard,
 } from "react-native";
 
-import imageBG from "../../images/Photo BG.png";
+import imageBG from "../../images/EnterBackground.png";
 
 const BgScreen = ({ children }) => {
   //   const [isShowKeyboard, setIsShowKeyboard] = useState(false);

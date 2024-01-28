@@ -1,24 +1,116 @@
 import "react-native-gesture-handler";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Button } from "react-native";
+import React, { useLayoutEffect, useState } from "react";
+import { StyleSheet, TouchableOpacity } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+import ToolBarIcon from "./images/Icons/toolBar.js";
+import AddPostIcon from "./images/Icons/addPostIcon.js";
+import UserIcon from "./images/Icons/user.js";
+import LogOut from "./images/Icons/logOut.js";
+
 import RegistrationScreen from "./Screens/RegistrationScreen.jsx";
 import LoginScreen from "./Screens/LoginScreen.jsx";
-import HomeScreen from "./Screens/HomeScreen.jsx";
+
+import ToolBar from "./Screens/MapScreen.jsx";
+import AddPost from "./Screens/CreatePostsScreen.jsx";
+import Profile from "./Screens/ProfileScreen.jsx";
 
 const MainStack = createStackNavigator();
+const Tabs = createBottomTabNavigator();
+
+function Home({ navigation, route }) {
+  const [currentTab, setCurrentTab] = useState("ToolBar");
+
+  const getHeaderTitle = (currentTab) => {
+    switch (currentTab) {
+      case "ToolBar":
+        return "Публікації";
+      case "AddPost":
+        return "Створити публікацію";
+      case "Profile":
+        return "Профіль";
+      default:
+        return "Публікації";
+    }
+  };
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: getHeaderTitle(currentTab),
+    });
+  }, [navigation, route, currentTab]);
+
+  return (
+    <Tabs.Navigator
+      screenOptions={({ route }) => ({
+        tabBarStyle: {
+          height: 83,
+          justifyContent: "center",
+          alignItems: "center",
+        },
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconComponent;
+
+          if (route.name === "ToolBar") {
+            iconComponent = (
+              <ToolBarIcon size={size} color={focused ? "red" : color} />
+            );
+          } else if (route.name === "AddPost") {
+            iconComponent = (
+              <AddPostIcon size={size} color={focused ? "red" : color} />
+            );
+          } else if (route.name === "Profile") {
+            iconComponent = (
+              <UserIcon size={size} color={focused ? "red" : color} />
+            );
+          }
+          return iconComponent;
+        },
+      })}
+    >
+      <Tabs.Screen
+        name="ToolBar"
+        component={ToolBar}
+        options={{ tabBarShowLabel: false, headerShown: false }}
+        listeners={{
+          tabPress: () => setCurrentTab("ToolBar"),
+        }}
+      />
+      <Tabs.Screen
+        name="AddPost"
+        component={AddPost}
+        options={{ tabBarShowLabel: false, headerShown: false }}
+        listeners={{
+          tabPress: () => setCurrentTab("AddPost"),
+        }}
+      />
+      <Tabs.Screen
+        name="Profile"
+        component={Profile}
+        options={{ tabBarShowLabel: false, headerShown: false }}
+        listeners={{
+          tabPress: () => setCurrentTab("Profile"),
+        }}
+      />
+    </Tabs.Navigator>
+  );
+}
 
 export default () => {
   return (
     <NavigationContainer>
-      <MainStack.Navigator>
-        {/* initialRouteName="Registration"> */}
-        {/* <MainStack.Screen name="Registration" component={RegistrationScreen} />
-        <MainStack.Screen name="Login" component={LoginScreen} /> */}
-        <MainStack.Screen name="Home" component={HomeScreen} options={Option} />
+      <MainStack.Navigator initialRouteName="Registration">
+        <MainStack.Screen name="Registration" component={RegistrationScreen} />
+        <MainStack.Screen name="Login" component={LoginScreen} />
+        <MainStack.Screen
+          name="Home"
+          component={Home}
+          options={Option}
+        ></MainStack.Screen>
       </MainStack.Navigator>
     </NavigationContainer>
   );
@@ -34,7 +126,6 @@ const styles = StyleSheet.create({
 });
 
 const Option = {
-  headerTitle: "Публікації",
   headerTitleAlign: "center",
   headerStyle: {
     backgroundColor: "#FFF",
@@ -54,13 +145,9 @@ const Option = {
     fontSize: 17,
   },
 
-  headerRight: () => <Button title="click" onPress={() => alert("Log out!")} />,
+  headerRight: () => (
+    <TouchableOpacity onPress={() => alert("Log out!")}>
+      <LogOut />
+    </TouchableOpacity>
+  ),
 };
-
-// <View style={styles.container}>
-//   {/* <MainBackground> */}
-//   {/* <LoginScreen /> */}
-//   {/* <RegistrationScreen /> */}
-//   {/* </MainBackground> */}
-//   <StatusBar style="auto" />
-// </View>;
