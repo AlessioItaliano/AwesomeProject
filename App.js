@@ -15,9 +15,10 @@ import LogOut from "./images/Icons/logOut.js";
 import RegistrationScreen from "./Screens/RegistrationScreen.jsx";
 import LoginScreen from "./Screens/LoginScreen.jsx";
 
-import ToolBar from "./Screens/MapScreen.jsx";
+import ToolBar from "./Screens/HomeScreen.jsx";
 import AddPost from "./Screens/CreatePostsScreen.jsx";
 import Profile from "./Screens/ProfileScreen.jsx";
+// import Profile from "./Screens/MapScreen.jsx";
 
 const MainStack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -60,9 +61,7 @@ function Home({ navigation, route }) {
               <ToolBarIcon size={size} color={focused ? "red" : color} />
             );
           } else if (route.name === "AddPost") {
-            iconComponent = (
-              <AddPostIcon size={size} color={focused ? "red" : color} />
-            );
+            iconComponent = <AddPostIcon size={size} color={color} />;
           } else if (route.name === "Profile") {
             iconComponent = (
               <UserIcon size={size} color={focused ? "red" : color} />
@@ -106,11 +105,7 @@ export default () => {
       <MainStack.Navigator initialRouteName="Registration">
         <MainStack.Screen name="Registration" component={RegistrationScreen} />
         <MainStack.Screen name="Login" component={LoginScreen} />
-        <MainStack.Screen
-          name="Home"
-          component={Home}
-          options={Option}
-        ></MainStack.Screen>
+        <MainStack.Screen name="Home" component={Home} options={Option} />
       </MainStack.Navigator>
     </NavigationContainer>
   );
@@ -146,7 +141,10 @@ const Option = {
   },
 
   headerRight: () => (
-    <TouchableOpacity onPress={() => alert("Log out!")}>
+    <TouchableOpacity
+      onPress={() => alert("Log out!")}
+      style={{ paddingRight: 16 }}
+    >
       <LogOut />
     </TouchableOpacity>
   ),
